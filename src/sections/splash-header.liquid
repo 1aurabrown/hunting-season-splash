@@ -1,0 +1,50 @@
+<div class="splash-header" data-section-id="{{ section.id }}" data-section-type="splash-header-section">
+  <header role="banner">
+      <div itemscope itemtype="http://schema.org/Organization">
+
+        <a href="/" itemprop="url" class="site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+          {% if section.settings.logo != blank %}
+            <img src="{{ section.settings.logo | img_url: image_size }}"
+                 srcset="{{ section.settings.logo | img_url: '92x' }} 92w, {{ section.settings.logo | img_url: '184x' }} 184w, {{ section.settings.logo | img_url: '368x' }} 368w"
+                 sizes="(min-width: 750px) 184px, 92px"
+                 alt="{{ section.settings.logo.alt | default: shop.name }}"
+                 itemprop="logo">
+          {% else %}
+            {{ shop.name }}
+          {% endif %}
+        </a>
+      </div>
+
+  </header>
+
+  <nav role="navigation">
+    <a href="#our-story">Our Story</a>
+    <a href="#our-founder">Our Founder</a>
+    <a href="#stockists">Stockists</a>
+    <a href="{{settings.social_instagram_link}}" target="_blank">Instagram</a>
+  </nav>
+</div>
+
+{% javascript %}
+  $('.splash-header').on('click', 'a[href^="#"]', function (event) {
+    event.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top + 1
+    }, 500);
+  });
+
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      }
+    ]
+  }
+{% endschema %}

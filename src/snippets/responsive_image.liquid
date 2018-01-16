@@ -1,0 +1,28 @@
+{% comment %}
+Responsive images with srcset.
+{% endcomment %}
+
+{% assign default_default_size = "480x" %}
+{% assign default_sizes = "100vw" %}
+
+{% if default_size == nil %}{% assign default_size = default_default_size %}{% endif %}
+{% if sizes == nil %}{% assign sizes = default_sizes %}{% endif %}
+
+<img src="{{ image.src | img_url: default_size }}"
+  srcset="
+    {{ image.src | img_url: '50x'  }}      50w,
+    {{ image.src | img_url: '100x'  }}     100w,
+    {{ image.src | img_url: '160x'  }}     160w,
+    {{ image.src | img_url: '240x'  }}     240w,
+    {{ image.src | img_url: '480x'  }}     480w,
+    {{ image.src | img_url: '600x'  }}     600w,
+    {{ image.src | img_url: '800x'  }}     800w,
+    {{ image.src | img_url: '900x'  }}     900w,
+    {{ image.src | img_url: '1024x' }}     1024w,
+    {{ image.src | img_url: '1536x' }}     1536w,
+    {{ image.src | img_url: '2048x' }}     2048w"
+  sizes="{{ sizes }}"
+  alt="{{ image.alt | escape }}"
+  data-js-responsive="true"
+  {% if attributes != nil %}{{ attributes }}{% endif %}
+/>

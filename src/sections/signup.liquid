@@ -1,0 +1,94 @@
+<div id="signup">
+  <form class="signup" method="POST" action="//hunting-season.us11.list-manage.com/subscribe/post" novalidate="">
+      <input type="hidden" name="u" value="844fcaaf773f3baca7882f436">
+      <input type="hidden" name="id" value="c961ad667f">
+      <input type="email" value="" name="EMAIL" id="mce-EMAIL" placeholder="{{section.settings.placeholder}}" required>
+      <label><span class="submit arrow">Submit</span>
+        <input class="visually-hidden" type="submit" name="submit" value="submit">
+      </label>
+
+      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_844fcaaf773f3baca7882f436_c961ad667f" tabindex="-1" value=""></div>
+    </form>
+  <div class="messages">
+    <div class='error-feedback'>Please check the address you entered.</div>
+    <div class='success-feedback'>{{section.settings.success}}</div>
+  </div>
+</div>
+
+{% javascript %}
+
+$('#signup').on('submit', ' form.signup', function(e){
+  e.preventDefault();
+  var $el = $(e.target);
+  var $container = $(e.delegateTarget);
+  $container.attr('data-state', '');
+  var data = $el.serialize();
+  $email = $("input[type='email']", $el);
+  $submit = $("input[type='submit']", $el);
+
+  if (!$email[0].checkValidity()) {
+    $('.error-feedback', $container).text('Please check your email address');
+    $container.attr('data-state', 'error');
+    return;
+  }
+
+  $email.prop('disabled', true);
+  $submit.prop('disabled', true);
+  return $.ajax({
+    type: "GET",
+    url: $el.attr("action").replace('/post', '/post-json'),
+    data: data,
+    cache: false,
+    dataType: "jsonp",
+    jsonp: "c",
+    contentType: "application/json; charset=utf-8",
+    error: function(error) {
+      $email.prop('disabled', false);
+      $submit.prop('disabled', false);
+
+      $('.error-feedback', $container).text('An internal error has occured');
+
+      $container.attr('data-state', 'error');
+    },
+    success: function(data) {
+      $email.prop('disabled', false);
+      $submit.prop('disabled', false);
+
+      if ((data.result === "success") ||
+        (data.msg && data.msg.indexOf("already subscribed") >= 0) ||
+        (data.msg && data.msg.indexOf("too many recent signup requests") >= 0)
+      ) {
+
+        $container.attr('data-state', 'success')
+
+      } else {
+        error = data.msg.split(' - ')[1];
+        $('.error-feedback', $container).text(error);
+        $container.attr('data-state', 'error');
+      }
+    }
+  });
+});
+
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Email Form",
+    "settings": [
+      {
+        "type": "text",
+        "id": "success",
+        "label": "Success message",
+        "default": "Thank You!"
+      },
+      {
+        "type": "text",
+        "id": "placeholder",
+        "label": "Placeholder text",
+        "default": "Email address"
+      }
+    ]
+  }
+{% endschema %}

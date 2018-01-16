@@ -1,0 +1,38 @@
+/*================ General layout styles ================*/
+body,
+html {
+  background-color: $color-body;
+  font-family: "Lineto Brown Regular Sub", "Trebuchet MS", sans-serif;
+  font-size: 12px;
+  line-height: 1.67;
+  letter-spacing: .8px;
+}
+
+a, a:active, a:hover, a:visited {
+  color: $color-body-text;
+  text-decoration: none;
+}
+
+html input {
+  line-height: 1.67;
+  letter-spacing: .8px;
+  font-family: "Lineto Brown Regular Sub", "Trebuchet MS", sans-serif;
+  font-size: 1em;
+  color: $color-body-text;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.page-width {
+  @include clearfix();
+  max-width: $width-site;
+  padding: 0 $gutter;
+  margin: 0 auto;
+}
+
+ul, li {
+  list-style: none;
+  margin:0;
+  padding: 0;
+}

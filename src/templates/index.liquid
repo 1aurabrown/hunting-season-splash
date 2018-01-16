@@ -1,0 +1,81 @@
+{% layout 'splash' %}
+
+<div id="splash-body">
+  {% section 'splash-tiles' %}
+  <div class="body-bottom">
+    <div id="stockists">
+      <div class="copy desktop-1">
+        <h3>Stockists</h3>
+        <div>Hunting Season is proud to be carried at distinguished retailers and boutiques worldwide.
+        </div>
+      </div>
+      <div class="stockists-list desktop-3">
+        <h3>Online</h3>
+        <ul>
+          <li><a target="_blank" href="https://www.net-a-porter.com">Netaporter</a></li>
+          <li><a target="_blank" href="https://www.modaoperandi.com">Moda Operandi</a></li>
+          <li><a target="_blank" href="https://shop.goop.com">GOOP</a></li>
+          <li><a target="_blank" href="http://www.fwrd.com">FWRD By Elyse Walker</a></li>
+          <li><a target="_blank" href="https://theline.com">The Line</a></li>
+        </ul>
+      </div>
+      <div class="stockists-list desktop-2">
+        <h3>United States</h3>
+        <ul>
+          <li>Kirna Zabete</li>
+          <li>Fivestory</li>
+          <li>Forty Five Ten</li>
+          <li>Stanley Korshak</li>
+          <li>Pilot Powell</li>
+          <li>Goop</li>
+          <li>Capretto</li>
+          <li>Elyse Walker</li>
+          <li>The Kingdom</li>
+          <li>The Showroom</li>
+        </ul>
+      </div>
+      <div class="stockists-list desktop-4">
+        <h3>International</h3>
+        <ul>
+          <li>Selfridges</li>
+          <li>Aishti</li>
+          <li>Luisa World</li>
+          <li>Bongenie Grieder</li>
+          <li>Amanyara Resort</li>
+          <li>Tsum</li>
+          <li>Harvey Nichols Turkey</li>
+          <li>More Is Love</li>
+        </ul>
+      </div>
+    </div>
+    {% if settings.watermark != blank %}
+      <div id="watermark">
+        <img width="120px" src="{{ section.settings.logo | img_url: image_size }}"
+         srcset="{{ settings.watermark | img_url: '120x' }} 1x, {{ settings.watermark | img_url: '240x' }} 2x"
+         itemprop="logo"
+         alt="Watermark">
+    </div>
+    {% endif %}
+    <div id="social">
+      <div class="social-block desktop-1">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a target="_blank" href="mailto: Sales@Hunting-Season.com">Sales@Hunting-Season.com</a></li>
+          <li><a target="_blank" href="mailto: Press@Hunting-Season.com">Press@Hunting-Season.com</a></li>
+        </ul>
+      </div>
+      <div class="social-block desktop-3">
+        <h3>Instagram</h3>
+        {% assign instagram_split = {{settings.social_instagram_link | split: '.com/'}} %}
+        <div><a href="{{settings.social_instagram_link}}" target="_blank">@{{instagram_split[1]}}</a></div>
+      </div>
+      <div class="social-block desktop-2">
+        <h3>Keep In Touch</h3>
+        {% section 'signup' %}
+      </div>
+    </div>
+  </div>
+  <div id="copyright">
+    &copy; {{ shop.name }} {{ 'now' | date: "%Y" }}
+  </div>
+</div>
