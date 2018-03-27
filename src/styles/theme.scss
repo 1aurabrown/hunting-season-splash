@@ -4,6 +4,9 @@
     - You cannot use native CSS/Sass @imports in this file without a build script
 ==============================================================================*/
 
+/*================ VENDOR ================*/
+@import url('vendor/flickity.css');
+
 /*================ UTILS ================*/
 @import url('tools/mixins.scss');
 

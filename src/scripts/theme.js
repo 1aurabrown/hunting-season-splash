@@ -11,6 +11,9 @@ window.theme = window.theme || {};
 // =require slate/images.js
 // =require slate/variants.js
 
+/*================ Vendor ================*/
+// =require vendor/flickity.js
+
 /*================ Sections ================*/
 // =require sections/product.js
 

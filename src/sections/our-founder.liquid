@@ -1,0 +1,37 @@
+<div class="tiles tiles-two">
+  <div class="tile photo founder-photo">
+    <div>
+      {% include 'responsive_image', image: section.settings.image , sizes: '(min-width: 750) 50vw, 100vw'%}
+    </div>
+  </div>
+  <div id="our-founder" class="tile text">
+    <h3>{{ section.settings.heading }}</h3>
+    <div> {{ section.settings.text }} </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Founder",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Founder"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Hunting Season was established in 2006 by Danielle Corona. With a clear design aesthetic and uncompromising sense of style, Danielle sources the finest materials and works directly with skilled Colombian artisans to carefully craft each Hunting Season collection."
+    }
+  ]
+}
+
+{% endschema %}

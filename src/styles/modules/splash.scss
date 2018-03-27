@@ -1,7 +1,9 @@
-$margin: 9%;
-$margin-mobile: 16%;
+$margin: 10vw;
+$margin-mobile: 16vw;
 $margin-top: 37px;
 $margin-top-mobile: 20px;
+
+$desktop-carousel-margin: 180px;
 
 body.splash {
   text-align: center;
@@ -20,6 +22,29 @@ body.splash {
   ul {
     line-height: 2.25;
   }
+  .image-carousel--images {
+    white-space: nowrap;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+      height: 128vw;
+      width: 100vw;
+    }
+  }
+  .image-carousel--controls {
+    margin: 40px 40px 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left, .right {
+      width: 20px;
+      cursor: pointer;
+      svg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
   #social {
     margin-bottom: 45px;
     .social-block {
@@ -36,6 +61,13 @@ body.splash {
       position: absolute;
       width: 100%;
     }
+    .submit {
+      width: 20px;
+      svg {
+        height: auto;
+        width: 100%;
+      }
+    }
     .error-feedback, .success-feedback {
       display: none;
     }
@@ -51,6 +83,9 @@ body.splash {
       display: flex;
       border-bottom: 1px solid black;
       input[type=email]{
+        &:focus {
+            outline: none;
+        }
         font-size: 10px;
         flex-grow: 1;
         margin-right: 5px;
@@ -60,14 +95,9 @@ body.splash {
       cursor: pointer;
     }
   }
-  #tiles {
+  .tiles {
     display: flex;
-    flex-direction: column;
-    .photo {
-      position: relative;
-    }
     img {
-      position: absolute;
       display: block;
     }
   }
@@ -79,7 +109,6 @@ body.splash {
       display: flex;
       flex-direction: column;
       justify-content: center;
-
     }
   }
   #copyright {
@@ -98,27 +127,12 @@ body.splash {
     margin: 0 0 40px 0;
   }
   @include media-query($small) {
+    .tiles {
+      display: block;
+    }
     .body-bottom, .tile.text {
       margin-left: $margin-mobile;
       margin-right: $margin-mobile;
-    }
-    .mobile-1 {
-      order: 1;
-    }
-    .mobile-2 {
-      order: 2;
-    }
-    .mobile-3 {
-      order: 3;
-    }
-    .mobile-4 {
-      order: 4;
-    }
-    .mobile-5 {
-      order: 5;
-    }
-    .mobile-6 {
-      order: 6;
     }
     .splash-header {
       padding: $margin-top-mobile 0;
@@ -144,13 +158,12 @@ body.splash {
         margin-top: 83px;
       }
     }
-
+    #our-founder {
+      padding-bottom: 0;
+    }
     .tile {
       &.text {
         padding: 155px 0;
-        &:last-child {
-          padding-bottom: 0;
-        }
         &.tagline {
           padding: 20% 0;
         }
@@ -174,24 +187,6 @@ body.splash {
     #splash-body {
       padding-bottom: 45px;
     }
-    .desktop-1 {
-      order: 1;
-    }
-    .desktop-2 {
-      order: 2;
-    }
-    .desktop-3 {
-      order: 3;
-    }
-    .desktop-4 {
-      order: 4;
-    }
-    .desktop-5 {
-      order: 5;
-    }
-    .desktop-6 {
-      order: 6;
-    }
     .splash-header {
       margin-top: $margin-top;
     }
@@ -203,13 +198,34 @@ body.splash {
         width: 184px;
       }
     }
+    .image-carousel {
+      margin: 180px 0;
+    }
+    .image-carousel--images {
+      opacity: 0;
+      transition: opacity .2s;
+      &.flickity-enabled {
+        opacity: 1;
+      }
+      img {
+        height: calc(1.28 * (50vw - #{$desktop-carousel-margin}));
+        margin-right: $desktop-carousel-margin;
+        width: calc(50vw - #{$desktop-carousel-margin});
+        object-fit: cover;
+      }
+    }
+    .image-carousel--controls {
+      margin: 40px auto 0 auto;
+      width: calc(50vw - #{$desktop-carousel-margin});
+    }
     nav {
       line-height: 1;
       display: flex;
       margin: 0 $margin;
-      a:nth-child(1), a:nth-child(3) {
+      a {
         margin-right: 45px;
-      }a:nth-child(2) {
+      }
+      a:nth-child(3) {
         margin-right: auto
       }
     }
@@ -249,17 +265,22 @@ body.splash {
       padding-left: 10px;
       padding-right: 10px;
     }
-    #tiles {
-      flex-wrap: wrap;
-      height: 160vw;
-      .break {
-        width: 0;
-        height: 100%;
+    .tiles {
+      display: flex;
+      > div {
+        flex-basis: 50%;
+      }
+    }
+    .tiles-four {
+      height: 95vw;
+      > div {
+        display: flex;
+        flex-direction: column;
       }
     }
     .tile {
-      width: 50%;
-      display: inline-block;
+      width: 100%;
+      display: block;
       &.text {
         flex-grow: 1;
         padding-left: $margin;
@@ -274,9 +295,9 @@ body.splash {
     }
   }
   @include media-query($large-up) {
-    #tiles {
+    .tiles-four {
       flex-wrap: wrap;
-      height: 135vw;
+      height: 90vw;
     }
   }
 }

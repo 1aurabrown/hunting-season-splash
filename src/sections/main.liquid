@@ -1,0 +1,124 @@
+<div class="tiles tiles-four">
+  <div>
+    <div class="tile photo">
+      <div>
+        {% include 'responsive_image', image: section.settings.image_top_left , sizes: '(min-width: 750) 50vw, 100vw'%}
+      </div>
+    </div>
+    <div id="our-story" class="tile text small--hide">
+      <h3>{{ section.settings.text__bottom_left_heading }}</h3>
+      <div>
+        {{ section.settings.text_bottom_left}}
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="tile text tagline">
+      <h2>{{ section.settings.text_top_right }}</h2>
+    </div>
+    <div class="tile photo small--hide" >
+      <div style="padding-bottom: {{ 100 | divided_by: section.settings.image_3.aspect_ratio }}%">
+        {% include 'responsive_image', image: section.settings.image_bottom_right , sizes: '(min-width: 750) 50vw, 100vw'%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% assign size = section.blocks | size %}
+{% if size > 0 %}
+  <div class="image-carousel">
+    <div class="image-carousel--images">
+      {% for block in section.blocks %}
+        {% include 'responsive_image', image: block.settings.image, size: sizes="(min-width: 750px) 30vw, 100vw" %}
+      {% endfor %}
+    </div>
+    <div class="image-carousel--controls">
+      <div class="left">{{ 'icon-left.svg' | asset_url | img_tag }}</div>
+      <div class="title">{{ section.settings.title }}</div>
+      <div class="right">{{ 'icon-right.svg' | asset_url | img_tag }}</div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="tiles medium-up--hide">
+  <div id="our-story-mobile" class="tile text">
+    <h3>{{ section.settings.text__bottom_left_heading }}</h3>
+    <div>
+      {{ section.settings.text_bottom_left}}
+    </div>
+  </div>
+</div>
+
+{% javascript %}
+$('.image-carousel--images').flickity({
+  wrapAround: true,
+  prevNextButtons: false,
+  pageDots: false
+})
+
+$('.image-carousel--controls .left').click( function(e){
+  e.preventDefault();
+  $('.image-carousel--images').flickity('previous')
+})
+
+$('.image-carousel--controls .right').click( function(e){
+  e.preventDefault();
+  $('.image-carousel--images').flickity('next')
+})
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Image Tiles and Carousel",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_top_left",
+      "label": "Top Left Image"
+    },
+    {
+      "type": "text",
+      "id": "text_top_right",
+      "label": "Top Right Text",
+      "default": "Seek and you shall find"
+    },
+    {
+      "type": "text",
+      "id": "text__bottom_left_heading",
+      "label": "Bottom Left Text heading",
+      "default": "Our Story"
+    },
+    {
+      "type": "textarea",
+      "id": "text_bottom_left",
+      "label": "Bottom Left Text (hidden on mobile)",
+      "default": "Straw woven by hand in Colombia, an ancient technique passed down from mother to daughter. Impossibly lightweight wooden box frames developed by a master carpenter. The finest Italian hardware handmade in Florence. Each element in a Hunting Season piece is considered, sourced from far-flung locales and artisans with distinct specialties honed over generations, and brought together by hand in Colombia."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_bottom_right",
+      "label": "Bottom Right Image (hidden on mobile)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Carousel Title",
+      "default": "Title Here"
+    }
+  ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Carousel Image",
+        "settings": [
+          {
+            "label": "Image",
+            "id": "image",
+            "type": "image_picker"
+          }
+        ]
+      }
+    ]
+}
+
+{% endschema %}
