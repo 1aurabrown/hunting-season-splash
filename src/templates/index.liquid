@@ -4,51 +4,7 @@
   {% section 'main' %}
   {% section 'our-founder' %}
   <div class="body-bottom">
-    <div id="stockists">
-      <div class="copy desktop-1">
-        <h3>Stockists</h3>
-        <div>Hunting Season is proud to be carried at distinguished retailers and boutiques worldwide.
-        </div>
-      </div>
-      <div class="stockists-list desktop-3">
-        <h3>Online</h3>
-        <ul>
-          <li><a target="_blank" href="https://www.net-a-porter.com">Netaporter</a></li>
-          <li><a target="_blank" href="https://www.modaoperandi.com">Moda Operandi</a></li>
-          <li><a target="_blank" href="https://shop.goop.com">GOOP</a></li>
-          <li><a target="_blank" href="http://www.fwrd.com">FWRD By Elyse Walker</a></li>
-          <li><a target="_blank" href="https://theline.com">The Line</a></li>
-        </ul>
-      </div>
-      <div class="stockists-list desktop-2">
-        <h3>United States</h3>
-        <ul>
-          <li>Kirna Zabete</li>
-          <li>Fivestory</li>
-          <li>Forty Five Ten</li>
-          <li>Stanley Korshak</li>
-          <li>Pilot Powell</li>
-          <li>Goop</li>
-          <li>Capretto</li>
-          <li>Elyse Walker</li>
-          <li>The Kingdom</li>
-          <li>The Showroom</li>
-        </ul>
-      </div>
-      <div class="stockists-list desktop-4">
-        <h3>International</h3>
-        <ul>
-          <li>Selfridges</li>
-          <li>Aishti</li>
-          <li>Luisa World</li>
-          <li>Bongenie Grieder</li>
-          <li>Amanyara Resort</li>
-          <li>Tsum</li>
-          <li>Harvey Nichols Turkey</li>
-          <li>More Is Love</li>
-        </ul>
-      </div>
-    </div>
+    {% section 'stockists' %}
     {% if settings.watermark != blank %}
       <div id="watermark">
         <img width="120px" src="{{ section.settings.logo | img_url: image_size }}"

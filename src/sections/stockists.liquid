@@ -1,0 +1,106 @@
+{% assign online = "" %}
+{% assign us = "" %}
+{% assign international = "" %}
+{% for block in section.blocks %}
+  {% if block.settings.title.size > 0 %}
+    {% capture block_html %}
+      <li>
+        {% if block.settings.link %}
+          <a target="_blank" href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+        {% else %}
+          {{ block.settings.title }}
+        {% endif %}
+      </li>
+    {% endcapture %}
+    {% case block.settings.section %}
+      {% when "online" %}
+        {% assign online = online | append: block_html %}
+      {% when "us" %}
+        {% assign us = us | append: block_html %}
+      {% when "international" %}
+        {% assign international = international | append: block_html %}
+    {% endcase %}
+  {% endif %}
+{% endfor %}
+
+<div class="copy desktop-1">
+  <h3>{{ section.settings.title }}</h3>
+  <div>{{ section.settings.text }}</div>
+</div>
+
+<div class="stockists-list desktop-3">
+  <h3>Online</h3>
+  <ul>
+    {{ online }}
+  </ul>
+</div>
+<div class="stockists-list desktop-2">
+  <h3>United States</h3>
+  <ul>
+    {{ us }}
+  </ul>
+</div>
+<div class="stockists-list desktop-4">
+  <h3>International</h3>
+  <ul>
+    {{ international }}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Stockists",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Stockists"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Section Text",
+      "default": "Hunting Season is proud to be carried at distinguished retailers and boutiques worldwide."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Stockist",
+      "name": "Stockist",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "section",
+          "label": "Section",
+          "options": [
+            {
+              "value": "online",
+              "label": "Online"
+            },
+            {
+              "value": "us",
+              "label": "US"
+            },
+            {
+              "value": "international",
+              "label": "International"
+            }
+          ],
+          "default": "online"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
