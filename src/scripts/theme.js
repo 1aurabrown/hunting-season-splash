@@ -16,6 +16,7 @@ window.theme = window.theme || {};
 
 /*================ Sections ================*/
 // =require sections/product.js
+// =require sections/email-capture.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
@@ -24,6 +25,7 @@ window.theme = window.theme || {};
 $(document).ready(function() {
   var sections = new slate.Sections();
   sections.register('product', theme.Product);
+  sections.register('email-capture', theme.EmailCapture);
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));

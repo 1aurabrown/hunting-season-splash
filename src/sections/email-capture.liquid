@@ -1,0 +1,60 @@
+{% assign action = 'https://hunting-season.us11.list-manage.com/subscribe/post' %}
+{% assign u = '844fcaaf773f3baca7882f436' %}
+{% assign id = 'c961ad667f' %}
+
+{% capture hidden_input %}
+  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_844fcaaf773f3baca7882f436_c961ad667f" tabindex="-1" value=""></div>
+{% endcapture %}
+
+<section data-section-id="{{ section.id }}" data-section-type="email-capture">
+  <div class="email-capture__inner">
+    <form method="POST" action="{{ action }}" novalidate="" class="email-capture__form">
+        <div class="email-capture__form__top "><span class="headline-m email-capture__form__headline text-left">{{ section.settings.headline }}</span>
+          <span class="email-capture__close">{% include 'icon-close' %}</span>
+      </div>
+      <p class="copy text-center email-capture__form__copy">{{ section.settings.copy }}</p>
+      <div class="email-capture__form__inputs">
+        <div class="copy email-capture__error text-left copy-xs">Please check the email address you entered.</div>
+        <input type="hidden" name="u" value="{{ u }}">
+        <input type="hidden" name="id" value="{{ id }}">
+        <input class="email-capture__form__email copy-xs" placeholder="{{ section.settings.placeholder }}" type="email" value="" name="EMAIL" id="mce-EMAIL" />
+        <button class="email-capture__form__submit" type="submit" >
+          {% include 'submit-arrow' %}
+        </button>
+      </div>
+      {{ hidden_input }}
+
+    </form>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Email Capture",
+    "class": "email-capture",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Email Form"
+      },
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline",
+        "default": "Keep In Touch"
+      },
+      {
+        "type": "text",
+        "id": "copy",
+        "label": "Copy",
+        "default": "Keep updated on Hunting Season sales, special events, and news."
+      },
+      {
+        "type": "text",
+        "id": "placeholder",
+        "label": "Email Placeholder",
+        "default": "Your email"
+      }
+    ]
+  }
+{% endschema %}
