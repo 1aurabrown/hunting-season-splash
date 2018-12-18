@@ -3,23 +3,57 @@
     - Selectors setup for you to style form elements how you want
     - Focus, error, and disabled states are set to be extended
 ==============================================================================*/
+form {
+  margin: 0;
+}
+
+a,
+area,
+button,
+[role='button'],
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+}
+
 input,
 textarea,
 select {
-  border: 1px solid $color-border;
-  border-radius: 0;
+  font-size: 1.6rem;
   max-width: 100%;
-
-  &:focus {
-    // You should add some focus styles
-  }
-
+  border-radius: 0;
   &[disabled] {
     cursor: default;
-    // background-color: $color-disabled;
-    // border-color: $color-disabled-border;
   }
 }
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+
+button,
+input[type='submit'],
+label[for] {
+  cursor: pointer;
+}
+
+input, button {
+  border: 0;
+  border-radius: 0;
+  background: transparent
+}
+
+
+::placeholder {
+  color: $gray;
+}
+
 
 textarea {
   min-height: 100px;

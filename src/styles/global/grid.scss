@@ -188,14 +188,66 @@
 }
 // sass-lint:enable brace-style empty-line-between-blocks
 
+
+/* TYPOGRAPHY */
+
+
+@mixin responsive-typography($breakpoint: '') {
+  // sass-lint:disable no-important
+  .#{$breakpoint}headline-l {
+    text-transform: uppercase;
+    font-size: 3.6rem;
+    line-height: 1.33;
+    letter-spacing: .38rem;
+  }
+  .#{$breakpoint}headline-m {
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    line-height: 1.27;
+    letter-spacing: .25rem;
+  }
+  .#{$breakpoint}copy-s {
+    font-size: 1.2rem;
+    line-height: 1.67;
+    letter-spacing: .08rem;
+  }
+  .#{$breakpoint}copy-s-uppercase {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    line-height: 1.67;
+    letter-spacing: .13rem;
+  }
+  .#{$breakpoint}copy-s-list {
+    font-size: 1.2rem;
+    line-height: 2.25;
+    letter-spacing: .08rem;
+  }
+  .#{$breakpoint}copy-xs {
+    font-size: .9rem;
+    line-height: 1.67;
+    letter-spacing: .08rem;
+  }
+  .#{$breakpoint}copy-xxs {
+    font-size: .7rem;
+    line-height: .86;
+    letter-spacing: .02rem;
+  }
+  .#{$breakpoint}copy-xxs-tall {
+    font-size: .7rem;
+    line-height: 1.57;
+    letter-spacing: .02rem;
+  }
+}
 /*================ Build Base Grid Classes ================*/
 @include grid-column-generator();
 @include responsive-display-helper();
 @include responsive-text-align-helper();
+@include responsive-typography();
 
 /*================ Build Responsive Grid Classes ================*/
 @each $breakpoint in $breakpoint-has-widths {
   @include media-query($breakpoint) {
+    @include responsive-typography('#{$breakpoint}--');
     @include grid-column-generator('#{$breakpoint}--');
     @include grid-uniform-clearfix('#{$breakpoint}--');
     @include responsive-display-helper('#{$breakpoint}--');
